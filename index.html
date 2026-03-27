@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brian Dye | Professional Portfolio</title>
+  <meta name="description" content="Professional portfolio of Brian Dye, candidate for Dean of Student Services at New River Community College." />
+  <style>
+    :root {
+      --primary: #153b6d;
+      --primary-dark: #0e2748;
+      --accent: #c8a96b;
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #5b6472;
+      --border: #d8e0ea;
+      --shadow: 0 12px 30px rgba(18, 36, 66, 0.08);
+      --radius: 18px;
+      --max: 1150px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a { color: var(--primary); }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(21, 59, 109, 0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--primary-dark);
+    }
+
+    .brand strong {
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary) 55%, #275d9e);
+      color: #fff;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 340px;
+      height: 340px;
+      right: -70px;
+      top: -80px;
+    }
+
+    .hero::after {
+      width: 220px;
+      height: 220px;
+      left: -60px;
+      bottom: -70px;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 5.5rem 0 4.5rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 4vw, 4rem);
+      line-height: 1.08;
+      margin: 0 0 1rem;
+    }
+
+    .hero p {
+      margin: 0 0 1.5rem;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.92);
+      max-width: 60ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .button-primary {
+      background: #fff;
+      color: var(--primary-dark);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      padding: 1.35rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+    }
+
+    .hero-card h2 {
+      margin-top: 0;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .hero-list li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      color: rgba(255,255,255,0.94);
+    }
+
+    .hero-list .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.55rem;
+      flex: 0 0 auto;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+
+    .section-header .kicker {
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .section-header h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      line-height: 1.15;
+      color: var(--primary-dark);
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: -2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--primary-dark);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      height: 100%;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+    }
+
+    .card p:last-child,
+    .card ul:last-child { margin-bottom: 0; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .pill {
+      border: 1px solid #cbd7e5;
+      background: #f8fbff;
+      color: var(--primary-dark);
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 0;
+      padding-left: 1.1rem;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0.35rem;
+      bottom: 0.35rem;
+      left: 0.2rem;
+      width: 2px;
+      background: #d5e0ed;
+    }
+
+    .timeline li {
+      position: relative;
+      padding-left: 1.35rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .timeline li:last-child { margin-bottom: 0; }
+
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: -0.05rem;
+      top: 0.25rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--surface);
+      box-shadow: 0 0 0 3px #e7eef7;
+    }
+
+    .timeline h3 {
+      margin: 0;
+      font-size: 1.06rem;
+      color: var(--primary-dark);
+    }
+
+    .timeline .meta {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0.2rem 0 0.45rem;
+      font-size: 0.94rem;
+    }
+
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .doc-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .doc-link:hover {
+      transform: translateY(-2px);
+      border-color: #b9c9dc;
+    }
+
+    .doc-link strong {
+      display: block;
+      color: var(--primary-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .doc-link span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .arrow {
+      font-size: 1.25rem;
+      color: var(--primary);
+      flex: 0 0 auto;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, #f8fbff, #eef4fb);
+      border: 1px solid #d8e4f1;
+      border-radius: 24px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .callout h3 {
+      margin-top: 0;
+      color: var(--primary-dark);
+      font-size: 1.35rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.25rem;
+    }
+
+    .footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.88);
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer a { color: #fff; }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .two-column,
+      .grid-3,
+      .grid-2,
+      .docs-grid,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid > :first-child { grid-column: 1 / -1; }
+      .hero-grid > :last-child { grid-column: 1 / -1; }
+      .two-column > * { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 700px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .docs-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        text-align: left;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <strong>Brian Dye</strong>
+        <span>Professional Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#vision">Vision</a>
+        <a href="#experience">Experience</a>
+        <a href="#artifacts">Artifacts</a>
+        <a href="#community">Community</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Candidate for Dean of Student Services</span>
+          <h1>Transformational leadership focused on student success, access, and institutional impact.</h1>
+          <p>
+            Experienced educator and systems-minded leader with a record of advancing student pathways,
+            supporting innovation, and building collaborative structures that improve outcomes for learners,
+            staff, and communities.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#artifacts">View Portfolio Artifacts</a>
+            <a class="button button-secondary" href="#contact">Contact Information</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Highlights">
+          <h2>Leadership Highlights</h2>
+          <ul class="hero-list">
+            <li><span class="dot"></span><span>20+ years in education, instructional leadership, and student-centered program development</span></li>
+            <li><span class="dot"></span><span>Experience with strategic planning, budgeting, grants, and systems implementation</span></li>
+            <li><span class="dot"></span><span>Strong alignment with access, workforce readiness, and community partnership priorities</span></li>
+            <li><span class="dot"></span><span>Technology-forward approach to advising, communication, and student support</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container stats" aria-label="Key portfolio statistics">
+      <div class="stat">
+        <strong>20+</strong>
+        <span>Years in Education</span>
+      </div>
+      <div class="stat">
+        <strong>4</strong>
+        <span>Major School Systems Served</span>
+      </div>
+      <div class="stat">
+        <strong>10+</strong>
+        <span>Regional & National Presentations</span>
+      </div>
+      <div class="stat">
+        <strong>1</strong>
+        <span>Mission-Driven Leadership Focus</span>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">About</span>
+          <h2>Student-centered leadership rooted in access, collaboration, and continuous improvement.</h2>
+          <p>
+            My professional work has centered on helping students move from aspiration to achievement by
+            improving the systems, relationships, and supports that shape their educational experience.
+            I bring a combination of instructional insight, administrative perspective, and community connection
+            that aligns strongly with the mission of public higher education.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Student Success Orientation</h3>
+            <p>
+              I approach leadership through the lens of student persistence, belonging, and completion,
+              with attention to advising, transitions, engagement, and barriers that can interrupt progress.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Systems & Strategy</h3>
+            <p>
+              My experience includes long-range planning, resource alignment, grant stewardship, and
+              program implementation designed to improve outcomes and organizational effectiveness.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Innovation & Technology</h3>
+            <p>
+              I value thoughtful technology integration that expands access, improves communication,
+              and strengthens the delivery of services without losing the human connection students need.
+            </p>
+          </article>
+        </div>
+        <div class="pill-row" aria-label="Core themes">
+          <span class="pill">Student Success</span>
+          <span class="pill">Advising & Pathways</span>
+          <span class="pill">Strategic Planning</span>
+          <span class="pill">Budgeting & Grants</span>
+          <span class="pill">Community Partnerships</span>
+          <span class="pill">Technology Integration</span>
+          <span class="pill">Workforce Readiness</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vision">
+      <div class="container two-column">
+        <div class="callout">
+          <h3>Strategic Vision for Student Services</h3>
+          <p>
+            In a region where community colleges serve as a powerful engine for opportunity, student services
+            should function as an integrated, responsive system that supports learners from first contact through
+            completion and career advancement. My vision centers on strengthening pathways, improving advising,
+            expanding holistic support, and using data to refine services over time.
+          </p>
+          <p>
+            This includes supporting recent high school graduates, adult learners, and students balancing work,
+            family, and education while building partnerships that align student support with regional workforce needs.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Leadership Philosophy</h3>
+          <p>
+            I believe student success is a shared institutional responsibility. Effective leadership requires trust,
+            clear communication, and alignment around a common purpose. My goal is to build teams and systems that
+            are equitable, accountable, and continually improving.
+          </p>
+          <p>
+            I value collaboration across academic and student affairs, the thoughtful use of technology, and an
+            environment where staff are empowered to innovate in service of students.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Experience</span>
+          <h2>Professional experience that connects instruction, leadership, and organizational improvement.</h2>
+          <p>
+            Across classroom, district, and statewide roles, I have worked to strengthen student pathways,
+            support educators, and contribute to strategic initiatives that improve educational delivery.
+          </p>
+        </div>
+        <div class="card">
+          <ol class="timeline">
+            <li>
+              <h3>Radford City Schools</h3>
+              <span class="meta">STEM (Project Lead the Way) & Physical Science Teacher | 2011–Present</span>
+              <p>
+                Lead innovative STEM instruction, support student pathway development, contribute to school and division initiatives,
+                and participate in budgeting, planning, and grant-supported program implementation.
+              </p>
+            </li>
+            <li>
+              <h3>Virginia Department of Education / Virginia Tech</h3>
+              <span class="meta">Technology Coordinator | 2006–2010</span>
+              <p>
+                Designed and delivered professional development, supported systems implementation, and advanced technology integration
+                across multiple divisions to strengthen instructional practice and access.
+              </p>
+            </li>
+            <li>
+              <h3>Montgomery County Public Schools</h3>
+              <span class="meta">Teacher | 2010–2011</span>
+              <p>
+                Supported student growth through engaging instruction and collaborative school-based practice.
+              </p>
+            </li>
+            <li>
+              <h3>Pulaski County Public Schools</h3>
+              <span class="meta">Teacher & Technology Specialist (Special Education) | 1999–2006</span>
+              <p>
+                Taught upper elementary learners and supported specialized technology services that enhanced student access and staff effectiveness.
+              </p>
+            </li>
+            <li>
+              <h3>United States Air Force</h3>
+              <span class="meta">Civil Engineering | 1991–1995</span>
+              <p>
+                Developed discipline, teamwork, and mission-focused problem solving in a high-accountability environment.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Impact Areas</span>
+          <h2>Core areas of contribution that align with student services leadership.</h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Planning & Resource Alignment</h3>
+            <p>
+              Participated in division planning, budgeting conversations, and resource decisions tied to systems improvement and student support.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Grant Leadership</h3>
+            <p>
+              Wrote and secured a Virginia Department of Aviation grant and helped maintain requirements for Computer Science and Project Lead the Way initiatives.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Student Pathway Guidance</h3>
+            <p>
+              Supported students and families in planning postsecondary options and connecting educational choices to longer-term goals.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="artifacts">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Portfolio Artifacts</span>
+          <h2>Application materials and supporting documents.</h2>
+          <p>
+            Replace the placeholder links below with your final file names once you upload your documents to the same server.
+            This allows the site to function immediately as a public-facing professional portfolio.
+          </p>
+        </div>
+        <div class="docs-grid">
+          <a class="doc-link" href="resume.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Resume</strong>
+              <span>Modernized administrative resume</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="curriculum-vitae.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Curriculum Vitae</strong>
+              <span>Expanded professional and leadership record</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="cover-letter.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Cover Letter</strong>
+              <span>Tailored to Dean of Student Services</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="leadership-philosophy.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Statement of Leadership Philosophy</strong>
+              <span>Leadership beliefs and administrative approach</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="student-success-equity.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Student Success & Equity Statement</strong>
+              <span>Access, support, persistence, and completion</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="strategic-vision.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Strategic Vision for Student Services</strong>
+              <span>Priorities for advising, retention, and support</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="teaching-philosophy.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Teaching Philosophy</strong>
+              <span>Learner-centered instructional beliefs</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="innovation-statement.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Change Leadership & Innovation Statement</strong>
+              <span>Approach to change, improvement, and technology</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="sample-syllabus.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Sample Syllabus</strong>
+              <span>Instructional design and student support example</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+          <a class="doc-link" href="sample-lesson-plan.pdf" target="_blank" rel="noopener noreferrer">
+            <div>
+              <strong>Sample Lesson Plan</strong>
+              <span>Career pathway lesson with student success lens</span>
+            </div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="community">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Community & Professional Engagement</span>
+          <h2>Regional connection and service-oriented leadership.</h2>
+          <p>
+            My work reflects an ongoing commitment to supporting youth, families, schools, and communities through mentorship,
+            coaching, service, and professional contribution.
+          </p>
+        </div>
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Presentations & Professional Contributions</h3>
+            <ul>
+              <li>National Council of Teachers of Mathematics</li>
+              <li>TechKnowledgy Conference</li>
+              <li>Educational Technology Leadership Conference</li>
+              <li>Virginia Society for Technology in Education</li>
+              <li>Southwest Virginia Annual Leadership Conference</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Service & Community Involvement</h3>
+            <ul>
+              <li>Youth Leader and Children’s Minister</li>
+              <li>Track and Cross Country Coaching</li>
+              <li>Volunteer service with humane societies and local organizations</li>
+              <li>Tutoring and youth support</li>
+              <li>Appalachian Trail maintenance volunteer</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="kicker">Contact</span>
+          <h2>Professional contact information.</h2>
+        </div>
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Get in Touch</h3>
+            <p><strong>Email:</strong> <a href="mailto:briandye.teach@gmail.com">briandye.teach@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+15406164714">(540) 616-4714</a></p>
+            <p><strong>Location:</strong> Radford, Virginia</p>
+          </article>
+          <article class="card">
+            <h3>Publishing Notes</h3>
+            <p>
+              This site is self-contained in a single HTML file. To publish, upload this file as <strong>index.html</strong>
+              and place any linked PDFs in the same folder, or update the file paths to match your server structure.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 Brian Dye. All rights reserved.</div>
+      <div><a href="#top">Back to top</a></div>
+    </div>
+  </footer>
+</body>
+</html>
